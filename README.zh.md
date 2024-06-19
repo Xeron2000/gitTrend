@@ -1,3 +1,5 @@
+[简体中文](https://github.com/Xeron2000/gitTrend/blob/main/README.zh.md) | [English](https://github.com/Xeron2000/gitTrend/blob/main/README.md)
+
 ## 目录
 
 - [介绍](#介绍)
@@ -8,11 +10,13 @@
 
 ## 介绍
 
+![gt](https://raw.githubusercontent.com/Xeron2000/gitTrend/main/gt.png)
+
 ## 安装
 
 ### 使用构建好的二进制程序
 
-见Release
+见[Releases](https://github.com/Xeron2000/gitTrend/releases)
 
 ### 从源代码安装
 
@@ -21,14 +25,14 @@
 
 1. 克隆仓库
 
-   ```bash
+   ```
    git clone https://github.com/Xeron2000/gitTrend.git
    cd gitTrend
    ```
 
 2. 安装依赖项
 
-   ```bash
+   ```
    go mod tidy
    ```
 
@@ -41,13 +45,13 @@
 
 4. 运行项目
 
-   ```bash
+   ```
    gt scrape
    ```
 
 ## 使用
 
-```bash
+```
 gt scrape -s en -l go -t daily
 ```
 
