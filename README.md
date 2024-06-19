@@ -8,11 +8,13 @@
 
 ## 介绍
 
+![gt](https://raw.githubusercontent.com/Xeron2000/gitTrend/main/gt.png)
+
 ## 安装
 
 ### 使用构建好的二进制程序
 
-见Release
+见[Release](Release)
 
 ### 从源代码安装
 
