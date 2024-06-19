@@ -14,7 +14,7 @@
 
 ### 使用构建好的二进制程序
 
-见[Release](releases)
+见[Releases](https://github.com/Xeron2000/gitTrend/releases)
 
 ### 从源代码安装
 
