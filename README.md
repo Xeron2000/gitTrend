@@ -1,5 +1,3 @@
-[简体中文](https://github.com/Xeron2000/gitTrend/blob/main/README.zh.md) | [English](https://github.com/Xeron2000/gitTrend/blob/main/README.md)
-
 ## Table of Contents
 
 - [Introduction](#introduction)
@@ -59,16 +57,6 @@ Parameters explanation:
 - `-s, --spoken`: Specify the spoken language code (e.g., `en` for English).
 - `-l, --language`: Specify the programming language (e.g., `go` for Go language).
 - `-t, --time`: Specify the time range (e.g., `daily` for daily, `weekly` for weekly, `monthly` for monthly).
-
-## Contributing
-
-Contributions are welcome! Please follow these guidelines:
-
-1. Fork the repository
-2. Create a new branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
 
 ## License
 
