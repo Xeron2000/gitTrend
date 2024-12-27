@@ -1,14 +1,3 @@
-<<<<<<< HEAD
-## Table of Contents
-
-- [Introduction](#introduction)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
-
-=======
->>>>>>> a3fdbc2 (update README)
 ## Introduction
 
 ![gt](https://raw.githubusercontent.com/Xeron2000/gitTrend/main/gt.png)
