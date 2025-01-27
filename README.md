@@ -1,59 +1,22 @@
-# gitTrend - GitHub Trending Repositories Notifier (GitHub Actions Focused)
+# gitTrend - GitHub Trending Repositories Notifier
 
-gitTrend is a tool designed to scrape trending repositories from GitHub and send daily notifications via Telegram. It is specifically designed to be used with GitHub Actions for fully automated daily updates, requiring no local setup for regular use.
+gitTrend is a command-line tool to scrape trending repositories from GitHub and optionally send daily notifications via Telegram. It is designed to be used with Linux cron for automated daily updates.
 
 ## Features
 
-- **GitHub Actions First**: Optimized for seamless integration with GitHub Actions for daily automated scraping and notifications.
-- **Scrape GitHub Trending Repositories**: Automatically fetches the latest trending repositories based on your configured filters.
-- **Telegram Notifications**: Sends daily updates of trending repositories directly to your Telegram chat (optional).
-- **Configurable Filters**: Customize trends by spoken language, programming language, and time range via `config.json`.
-- **Minimal Setup**: Primarily designed for GitHub Actions, eliminating the need for local installation for daily operation.
+- **Scrape GitHub Trending Repositories**: Fetches the latest trending repositories based on configured filters.
+- **Telegram Notifications**: Sends daily updates of trending repositories to your Telegram chat (optional).
+- **Configurable Filters**: Filter trends by spoken language, programming language, and time range via `config.json`.
+- **Cron Scheduling**: Designed for automated daily runs using Linux cron.
 
-## GitHub Actions Setup (Recommended - No Local Setup Needed)
+## Installation
 
-Get started with daily trending GitHub repository notifications in just a few steps using GitHub Actions:
-
-1.  **Repository Secrets**:
-    -   Navigate to your GitHub repository settings -> "Secrets and variables" -> "Actions".
-    -   Create the following repository secrets:
-        -   `TELEGRAM_BOT_TOKEN`: Your Telegram Bot API token (required for Telegram notifications).
-        -   `TELEGRAM_CHAT_ID`: Your Telegram Chat ID (required for Telegram notifications).
-
-2.  **Configuration via `config.json`**:
-    -   Modify the `config.json` file in your repository to define your preferred filters and Telegram notification settings.
-
-    ```json
-    {
-      "spokenLanguage": "",
-      "progLanguage": "",
-      "timeRange": "daily",
-      "telegramBotToken": "",
-      "telegramChatID": ""
-    }
-    ```
-
-    -   `spokenLanguage`: Filter by spoken language (e.g., `en`, `zh`). Leave empty for all languages.
-    -   `progLanguage`: Filter by programming language (e.g., `go`). Leave empty for all programming languages.
-    -   `timeRange`: Set the time range for trending repositories: `daily`, `weekly`, or `monthly`. Default is `daily`.
-    -   `telegramBotToken`: Your Telegram Bot API token. Required for enabling Telegram notifications.
-    -   `telegramChatID`: Your Telegram Chat ID. Required if `telegramBotToken` is provided.
-
-3.  **Enable Workflow**:
-    -   Ensure the GitHub Actions workflow located at `.github/workflows/scrape-and-notify.yml` is enabled in your repository. This workflow is pre-configured to run daily at midnight UTC.
-
-With these steps, you'll receive daily updates of GitHub trending repositories directly in your Telegram chat, completely automated through GitHub Actions!
-
-## Optional Local Testing
-
-For testing purposes or if you wish to run gitTrend locally, follow these steps:
-
-### Prerequisites for Local Testing
+### Prerequisites
 
 - [Go](https://golang.org/dl/) 1.22.4+
 - [Git](https://git-scm.com/downloads)
 
-### Local Testing Installation
+### Running from Source
 
 1. Clone the repository:
 
@@ -68,20 +31,58 @@ For testing purposes or if you wish to run gitTrend locally, follow these steps:
    go mod tidy
    ```
 
-3. Build the binary:
+## Configuration
 
-   ```bash
-   go build -o gt
-   ```
+Configure the application using the `config.json` file in the project root.
 
-### Run Locally
-
-```bash
-./gt scrape
+```json
+{
+  "spokenLanguage": "",
+  "progLanguage": "",
+  "timeRange": "daily",
+  "telegramBotToken": "",
+  "telegramChatID": ""
+}
 ```
 
-Before running locally, ensure your `config.json` is properly set up, especially if testing Telegram notifications.
+- `spokenLanguage`: Filter trending repositories by spoken language (e.g., `en` for English, `zh` for Chinese). Leave empty for all languages.
+- `progLanguage`: Filter trending repositories by programming language (e.g., `go` for Go). Leave empty for all languages.
+- `timeRange`: Time range for trending repositories (`daily`, `weekly`, `monthly`). Default is `daily`.
+- `telegramBotToken`: Telegram Bot API token for sending notifications. Optional, leave empty to disable notifications.
+- `telegramChatID`: Telegram Chat ID to send notifications to. Optional, required if `telegramBotToken` is set.
+
+## Usage
+
+To scrape trending repositories and optionally send Telegram notifications, run:
+
+```bash
+go run main.go scrape
+```
+
+The tool reads configurations from `config.json`.  You can modify `config.json` to customize the scraping filters and Telegram notification settings.
+
+## Setting up Cron for Daily Notifications (Linux)
+
+To automate daily scraping and Telegram notifications using Linux cron:
+
+1. **Install prerequisites and clone the repository**: Ensure you have Go and Git installed, and have cloned the gitTrend repository as described in the [Installation](#installation) section.
+2. **Configure `config.json`**:  Set your `telegramBotToken` and `telegramChatID` in the `config.json` file if you want Telegram notifications.
+3. **Edit crontab**: Open your crontab file to add a new cron job:
+
+   ```bash
+   crontab -e
+   ```
+
+4. **Add cron job**: Add the following line to your crontab file to run the scraper daily at midnight:
+
+   ```cron
+   0 0 * * * go run main.go scrape
+   ```
+
+   This line schedules the `go run main.go scrape` command to run every day at midnight (00:00). Adjust the time as needed. Save and exit the crontab file.
+
+With these steps, `gitTrend` will automatically scrape GitHub trending repositories daily and send Telegram notifications (if configured) using Linux cron.
 
 ## License
 
-This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
